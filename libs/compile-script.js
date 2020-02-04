@@ -149,7 +149,7 @@ class JoinScripts {
 
 
 /**
- * @function compileScript translate a script entry `src` to an only one
+ * @function unifyScript translate a script entry `src` to an only one
  *    executable script with its required files
  * @param {object} opts the options for the babel translation
  * @param {string} src the entry script path
@@ -158,7 +158,7 @@ class JoinScripts {
  *    - there is an error at compilation
  */
 
-async function compileScript (src, opts) {
+async function unifyScript (src, opts) {
   const joiner = new JoinScripts(opts)
   await joiner.load(src)
   const script = joiner.toString()
@@ -166,7 +166,7 @@ async function compileScript (src, opts) {
 }
 
 
-module.exports = Object.assign(compileScript, {
-  compileScript,
+module.exports = Object.assign(unifyScript, {
+  unifyScript,
   setTranslator
 })

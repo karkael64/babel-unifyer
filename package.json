@@ -1,10 +1,11 @@
 {
-  "name": "babel-compile",
-  "version": "1.0.0",
-  "description": "Babel compilator to one executable script file for NodeJS or web browser",
+  "name": "babel-unifyer",
+  "version": "1.0.1",
+  "description": "Babel joiner to one executable script file for NodeJS or web browser",
   "keywords": [
     "babel",
-    "compile",
+    "unifyer",
+    "joiner",
     "promisify"
   ],
   "main": "index.js",
@@ -16,20 +17,23 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/karkael64/babel-compile"
+    "url": "git+https://github.com/karkael64/babel-unifyer.git"
   },
   "bugs": {
-    "url": "https://github.com/karkael64/babel-compile"
+    "url": "https://github.com/karkael64/babel-unifyer"
   },
-  "homepage": "https://github.com/karkael64/babel-compile#readme",
+  "homepage": "https://github.com/karkael64/babel-unifyer#readme",
   "author": "\"Karkael Haunter\" <karkael@gmail.com>",
-  "license": "apache2",
+  "license": "Apache-2.0",
   "devDependencies": {},
   "dependencies": {
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/run"
   }
 }
