@@ -1,0 +1,35 @@
+{
+  "name": "babel-compile",
+  "version": "1.0.0",
+  "description": "Babel compilator to one executable script file for NodeJS or web browser",
+  "keywords": [
+    "babel",
+    "compile",
+    "promisify"
+  ],
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "libs/",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karkael64/babel-compile"
+  },
+  "bugs": {
+    "url": "https://github.com/karkael64/babel-compile"
+  },
+  "homepage": "https://github.com/karkael64/babel-compile#readme",
+  "author": "\"Karkael Haunter\" <karkael@gmail.com>",
+  "license": "apache2",
+  "devDependencies": {},
+  "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
