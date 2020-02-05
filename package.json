@@ -1,6 +1,6 @@
 {
   "name": "babel-unifyer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Babel joiner to one executable script file for NodeJS or web browser",
   "keywords": [
     "babel",
@@ -25,7 +25,9 @@
   "homepage": "https://github.com/karkael64/babel-unifyer#readme",
   "author": "\"Karkael Haunter\" <karkael@gmail.com>",
   "license": "Apache-2.0",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-minify": "^0.5.1"
+  },
   "dependencies": {
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4"

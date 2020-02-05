@@ -162,7 +162,7 @@ async function unifyScript (src, opts) {
   const joiner = new JoinScripts(opts)
   await joiner.load(src)
   const script = joiner.toString()
-  return new vm.Script(script)
+  return Buffer.from(script)
 }
 
 

@@ -21,7 +21,8 @@ const vm = require("vm")
 const babelUnifyer = require("babel-unifyer")
 
 ;(async function () {
-  const script = await babelUnifyer(__dirname + "/a")
+  const buffer = await babelUnifyer(__dirname + "/a")
+  const script = new vm.Script(buffer)
   const ctx = vm.createContext({ console })
   await script.runInContext(ctx)
 })()
@@ -66,6 +67,7 @@ With this module, you can load files that are not written in JavaScript. The tra
 const {setTranslator} = require("babel-unifyer")
 setTranslator(".xml", function (contents) {
   // your translation
+  return contents
 })
 ```
 
