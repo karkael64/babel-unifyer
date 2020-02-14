@@ -45,11 +45,11 @@ const translators = {
   "": preparePlain
 }
 
-function prepare(data, filename) {
+function prepare(data, filename, opts) {
   const
     ext = path.extname(filename),
     trans = typeof translators[ext] === "function" ? translators[ext] : translators[""]
-  return trans(data.toString())
+  return trans(data.toString(), filename, opts)
 }
 
 function sourcemapFilepath(filepath, fromDir) {
@@ -101,10 +101,20 @@ function babel (path, editOpts) {
   return new Promise((resolve, reject) => {
     readFile(path).catch(reject).then((contents) => {
       const cfg = babelCore.loadPartialConfig(opts)
-      babelCore.transform(prepare(contents, path), cfg.options, (err, obj) => {
-        if (err) reject(err)
-        else resolve(obj)
-      })
+      const prepared = prepare(contents, path, cfg)
+      if (prepared instanceof Promise) {
+        prepared.then((data) => {
+          babelCore.transform(data, cfg.options, (err, obj) => {
+            if (err) reject(err)
+            else resolve(obj)
+          })
+        }).catch(reject)
+      } else {
+        babelCore.transform(prepared, cfg.options, (err, obj) => {
+          if (err) reject(err)
+          else resolve(obj)
+        })
+      }
     })
   })
 }

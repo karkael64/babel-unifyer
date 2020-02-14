@@ -1,2 +1,5 @@
 import test from "./b.js"
-console.log(test)
+import any from "./c.xml"
+
+console.log("Loaded ./b.js file:", test)
+console.log("Loaded ./c.xml file:", any)
