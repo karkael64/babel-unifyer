@@ -14,6 +14,8 @@ const { setTranslator } = babelUnifyer
 
   const script = new vm.Script(buffer)
   const ctx = vm.createContext({ console })
-  await script.runInContext(ctx)
+  const result = await script.runInContext(ctx)
+  
+  console.log("Print returned value:", result)
 
 })().then(() => { process.exit(0) }).catch(() => { process.exit(1) })

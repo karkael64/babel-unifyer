@@ -118,7 +118,7 @@ class JoinScripts {
 
   getSourceNode () {
     const chunks = [], hasSourceMap = this.sourceMap
-    chunks.push(`(function(e,f){function r(x){return function(p){var i=x[p];if(f[i][2])return f[i][2].exports;var o={},m={exports:o},[s,h]=f[i];f[i][2]=m;h.call(o,r(s),m,o);return m.exports}}r({"":e})("")})(${this.entryIndex}, [`)
+    chunks.push(`(function(e,f){function r(x){return function(p){var i=x[p];if(f[i][2])return f[i][2].exports;var o={},m={exports:o},[s,h]=f[i];f[i][2]=m;h.call(o,r(s),m,o);return m.exports}}; return r({"":e})("")})(${this.entryIndex}, [`)
     this.files.forEach((obj, key) => {
       if (key) chunks.push(',')
       chunks.push(`[${JSON.stringify(obj.reqsIndex)},function (require,module,exports) {\n`)
