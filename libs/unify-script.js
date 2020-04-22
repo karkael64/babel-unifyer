@@ -13,7 +13,11 @@ async function extractRequires (from, code, allowedExtensions) {
   await Promise.all(requires.map(async (str) => {
     try {
       const found = await getRequireEntry(str, from, allowedExtensions)
-      foundpaths[found] = str
+      if (found) {
+        foundpaths[found] = str
+      } else {
+        throw ResolveError.createCantResolve(from, str)
+      }
     }
     catch (err) {
       notfoundpaths.push(err)
@@ -55,7 +59,11 @@ async function extractAstRequires (from, ast, allowedExtensions) {
   await Promise.all(requires.map(async (str) => {
     try {
       const found = await getRequireEntry(str, from, allowedExtensions)
-      foundpaths[found] = str
+      if (found) {
+        foundpaths[found] = str
+      } else {
+        throw ResolveError.createCantResolve(from, str)
+      }
     }
     catch (err) {
       notfoundpaths.push(err)
