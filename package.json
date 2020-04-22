@@ -1,6 +1,6 @@
 {
   "name": "babel-unifyer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Babel joiner to one executable script file for NodeJS or web browser",
   "keywords": [
     "babel",

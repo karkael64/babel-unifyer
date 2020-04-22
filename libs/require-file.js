@@ -48,11 +48,14 @@ function readJsonFile (filepath) {
 async function getNodeModulePathEntry (root, name) {
   try {
     const config = await readJsonFile(path.resolve(root, name, "package.json"))
+    if (config.module) {
+      return path.resolve(root, name, config.module)
+    }
     if (config.main) {
       return path.resolve(root, name, config.main)
     }
+    return path.resolve(root, name)
   } catch (e) {}
-  return path.resolve(root, name)
 }
 
 async function getPathEntry (str, allowedExtensions) {
