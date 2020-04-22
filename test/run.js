@@ -18,4 +18,4 @@ const { setTranslator } = babelUnifyer
   
   console.log("Print returned value:", result)
 
-})().then(() => { process.exit(0) }).catch(() => { process.exit(1) })
+})().then(() => { process.exit(0) }).catch((err) => { console.log(err); process.exit(1) })

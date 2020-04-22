@@ -1,6 +1,7 @@
 const vm = require("vm")
 const { babel, setTranslator } = require("./babel-promisify")
 const getRequireEntry = require("./require-file")
+const ResolveError = require('./resolve-error')
 const { SourceNode, SourceMapConsumer } = require("source-map")
 
 
@@ -10,14 +11,20 @@ async function extractRequires (from, code, allowedExtensions) {
     .map(str => str.split(/["']/g)[1])
 
   await Promise.all(requires.map(async (str) => {
-    if (found = await getRequireEntry(str, from, allowedExtensions)) {
+    try {
+      const found = await getRequireEntry(str, from, allowedExtensions)
       foundpaths[found] = str
-    } else {
-      notfoundpaths.push(str)
+    }
+    catch (err) {
+      notfoundpaths.push(err)
     }
   }))
 
-  if (notfoundpaths.length) throw new Error(`These paths are not resolved: ${notfoundpaths.map(JSON.stringify).join(", ")}`)
+  if (notfoundpaths.length) {
+    const err = new ResolveError('Paths are not resolved')
+    err.paths = notfoundpaths
+    throw err
+  }
   return foundpaths
 }
 
@@ -46,15 +53,19 @@ async function extractAstRequires (from, ast, allowedExtensions) {
   const foundpaths = {}, notfoundpaths = [], requires = searchRequireIntoAst(ast.program.body)
 
   await Promise.all(requires.map(async (str) => {
-    if (found = await getRequireEntry(str, from, allowedExtensions)) {
+    try {
+      const found = await getRequireEntry(str, from, allowedExtensions)
       foundpaths[found] = str
-    } else {
-      notfoundpaths.push(str)
+    }
+    catch (err) {
+      notfoundpaths.push(err)
     }
   }))
 
   if (notfoundpaths.length) {
-    throw new Error(`These paths are not resolved: ${notfoundpaths.map(JSON.stringify).join(", ")}`)
+    const err = new ResolveError('Paths are not resolved')
+    err.paths = notfoundpaths
+    throw err
   }
   return foundpaths
 }
